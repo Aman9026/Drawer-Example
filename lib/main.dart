@@ -1,3 +1,4 @@
+import 'package:drawer/testpage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
               ? Colors.grey[50]
               : null),
       home: new HomePage(),
+      routes: <String, WidgetBuilder>{
+        "/a": (BuildContext context) => new TestPage(),
+      },
     );
   }
 }
@@ -46,9 +50,17 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             new ListTile(
-              title: new Text("p1"),
-              trailing: new Icon(Icons.arrow_upward),
-            ),
+                title: new Text("p1"),
+                trailing: new Icon(Icons.arrow_upward),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed("/a");
+
+                  ///For passing the page name as well
+                  /// Navigator.of(context).push(new MaterialPageRoute(
+                  ///     builder: (context) => new TestPage("Page name")));
+                  /// also make sure to add a constructor on the Testpage to take page name
+                }),
             new ListTile(
               title: new Text("p1"),
               trailing: new Icon(Icons.arrow_downward),
